@@ -1,3 +1,6 @@
+require("data.table")
+require("plyr")
+
 #read the data files and combine into a single set
 train<-read.table("./UCI HAR Dataset/train/X_train.txt")
 test<-read.table("./UCI HAR Dataset/test/X_test.txt")
@@ -41,4 +44,3 @@ tidy_set<-final_set[, lapply(.SD,mean), by=list(Activity, Subject)]
 tidy_set<-tidy_set[order(tidy_set$Activity, tidy_set$Subject)]
 #write the set to a file
 write.table(x = tidy_set, file = "./tidy_set.txt", row.name=F, sep=",")
-
